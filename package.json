@@ -1,0 +1,30 @@
+{
+  "name": "canvas-slider",
+  "version": "1.0.0",
+  "description": "browse trough images using a canvas tag",
+  "scripts": {
+    "build": "./node_modules/.bin/browserify src/index.coffee -o dist/canvas-slider.js",
+    "watch": "./node_modules/.bin/watchify src/index.coffee -o dist/canvas-slider.js",
+    "test": "mocha --compilers coffee:coffee-script/register src/**/*.test.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:christiaan/canvas-slider.git"
+  },
+  "author": "Christiaan Baartse",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^10.1.3",
+    "coffee-script": "^1.9.2",
+    "coffeeify": "^1.1.0",
+    "mocha": "^2.2.4",
+    "uglifyify": "^3.0.1",
+    "watchify": "^3.2.1"
+  },
+  "browserify" : {
+    "transform": [
+      "coffeeify",
+      "uglifyify"
+    ]
+  }
+}
