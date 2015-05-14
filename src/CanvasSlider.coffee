@@ -3,7 +3,8 @@ class CanvasSlider
     @context = @node.getContext '2d'
 
   render: (x)->
-    @context.clearRect 0, 0, @node.width, @node.height
+    @context.fillStyle = 'pink'
+    @context.fillRect 0, 0, @node.width, @node.height
     @images.forEach (image)=>
       @_drawImage image.node, image.x + x, image.y
 

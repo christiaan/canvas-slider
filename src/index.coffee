@@ -7,13 +7,17 @@ canvasSlider.createFrom = (node) ->
   images = Array.prototype.map.call(node.children, (image, index)->
     {
       node: image,
-      x: index * node.width,
-      y: 0
+      x: (index * node.width) + centered(image.width, node.width),
+      y: centered(image.height, node.height)
     }
   )
 
-  slider = new CanvasSlider(node, images)
-
-  slider.render 0
+  return new CanvasSlider(node, images)
 
 window.canvasSlider = canvasSlider
+
+centered = (size, available)->
+  short = available - size
+  return 0 if short <= 0
+
+  return Math.floor(short / 2)
