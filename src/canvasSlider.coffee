@@ -1,14 +1,10 @@
-CanvasViewport = require './CanvasViewport'
+viewportFactory = require './viewportFactory'
 dragHandler = require './dragHandler'
 Image = require './Image'
 
 module.exports = (node)->
-  if !node or node.tagName.toLowerCase() != 'canvas'
-    throw new Error 'CanvasSlider expects a canvas node'
 
-  images = getImages node
-
-  viewport = new CanvasViewport(node, images)
+  viewport = viewportFactory(node, getImages node)
 
   viewport.render 0
 
@@ -22,8 +18,8 @@ getImages = (node)->
     if image.tagName.toLowerCase() != 'img'
       throw new Error 'Canvas slider expects the canvas to contain IMG nodes.'
 
-    x = (index * node.width) + centered(image.width, node.width)
-    y = centered(image.height, node.height)
+    x = (index * node.clientWidth) + centered(image.width, node.clientWidth)
+    y = centered(image.height, node.clientHeight)
     new Image(image, x, y)
 
 centered = (size, available)->

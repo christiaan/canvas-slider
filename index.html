@@ -15,6 +15,16 @@
   cursor: grabbing;
 }
 
+div.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+div.slider img {
+  position: absolute;
+  pointer-events: none
+}
+
 p {
   text-align: center;
 }
@@ -31,12 +41,12 @@ p {
 
 <p>Example Sliders</p>
 
-<canvas class="slider" width="400" height="500">
+<div class="slider" style="width: 400px; height: 500px">
   <img src="http://lorempixel.com/400/500"/>
   <img src="http://lorempixel.com/g/360/500"/>
   <img src="http://lorempixel.com/150/150"/>
   <img src="http://lorempixel.com/350/350"/>
-</canvas>
+</div>
 
 <script src="dist/canvas-slider.js"></script>
 </body>
