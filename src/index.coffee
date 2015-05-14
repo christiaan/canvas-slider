@@ -1,4 +1,5 @@
 CanvasViewport = require './CanvasViewport'
+dragHandler = require './dragHandler'
 Image = require './Image'
 
 window.onload = ->
@@ -10,11 +11,13 @@ window.onload = ->
   )
 
   viewport = new CanvasViewport(node, images)
+
   x = 0
-  setInterval ->
-    viewport.render(x);
-    x += 1;
-  , 16
+  viewport.render x
+
+  dragHandler node, document, (movement)->
+    x += movement
+    viewport.render x
 
 centered = (size, available)->
   short = available - size
