@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Canvas Slider</title>
+</head>
+<body>
+
+<canvas id="slider" width="640" height="400">
+  <img src="http://placekitten.com/g/640/400"/>
+  <img src="http://placekitten.com/g/600/400"/>
+  <img src="http://placekitten.com/g/640/150"/>
+  <img src="http://placekitten.com/g/500/400"/>
+</canvas>
+
+<script src="dist/canvas-slider.js"></script>
+<script>
+window.onload = function () {
+  canvasSlider.createFrom(document.getElementById('slider'));
+}
+</script>
+</body>
+</html>
