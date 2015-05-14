@@ -16,7 +16,12 @@
 <script src="dist/canvas-slider.js"></script>
 <script>
 window.onload = function () {
-  canvasSlider.createFrom(document.getElementById('slider'));
+  var slider = canvasSlider.createFrom(document.getElementById('slider'));
+  var x = 0;
+  setInterval(function () {
+    slider.render(x);
+    x -= 1;
+  }, 16);
 }
 </script>
 </body>
