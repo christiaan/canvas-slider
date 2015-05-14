@@ -1,16 +1,16 @@
 class CanvasViewport
   constructor: (@node, @images)->
     @context = @node.getContext '2d'
+    @_setPosition 0
 
   render: (x)->
-    x = Math.max 0, Math.min x, @node.width * (@images.length - 1)
+    @_setPosition x
     @context.fillStyle = 'pink'
     @context.fillRect 0, 0, @node.width, @node.height
-    @images.forEach (image)=>
-      @_drawImage image.node, image.x - x, image.y
+    @images.forEach (image)=> image.draw(this)
 
-
-  _drawImage: (image, x, y)->
+  drawImage: (image, x, y)->
+    x -= @position
     [x, width, sx] = axisFitOnCanvas(x, image.width, @node.width)
     [y, height, sy] = axisFitOnCanvas(y, image.height, @node.height)
     return if width == 0 or height == 0
@@ -19,6 +19,10 @@ class CanvasViewport
     @context.drawImage(image, sx, sy, width, height, x, y, width, height);
     return
 
+  _setPosition: (position)->
+    position = Math.min position, @node.width * (@images.length - 1)
+    position = Math.max 0, position
+    @position = position
 
 axisFitOnCanvas = (position, size, available)->
   sourcePosition = 0
