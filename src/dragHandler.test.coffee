@@ -3,7 +3,14 @@ assert = require 'assert'
 dragHandler = require './dragHandler'
 
 node = {
-  listeners: {}
+  listeners: {},
+  classList: {
+    list: {}
+    add: (cssClass)->
+      @list[cssClass] = true
+    remove: (cssClass)->
+      delete @list[cssClass]
+  }
   addEventListener: (event, cb)->
     @listeners[event] = cb
   removeEventListener: (event, cb)->
@@ -24,4 +31,12 @@ describe 'dragHandler', ->
     assert.equal movement, -5
 
     node.listeners.mouseup()
-    assert.ok(!node.listeners.mousemove)
+    assert.ok !node.listeners.mousemove
+
+  it 'should indicate dragging by adding a class', ->
+    dragHandler node, node, (x)->
+    node.listeners.mousedown {clientX: 0}
+    assert.ok node.classList.list['dragging'], 'class dragging should be added'
+
+    node.listeners.mouseup()
+    assert.ok !node.classList.list['dragging']

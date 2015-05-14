@@ -5,8 +5,7 @@ class CanvasViewport
 
   render: (x)->
     @_setPosition x
-    @context.fillStyle = 'pink'
-    @context.fillRect 0, 0, @node.width, @node.height
+    @context.clearRect 0, 0, @node.width, @node.height
     @images.forEach (image)=> image.draw(this)
 
   drawImage: (image, x, y)->
