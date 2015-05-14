@@ -1,4 +1,4 @@
-CanvasSlider = require './CanvasSlider'
+CanvasViewport = require './CanvasViewport'
 
 canvasSlider = window.canvasSlider || {}
 
@@ -12,7 +12,7 @@ canvasSlider.createFrom = (node) ->
     }
   )
 
-  return new CanvasSlider(node, images)
+  return new CanvasViewport(node, images)
 
 window.canvasSlider = canvasSlider
 

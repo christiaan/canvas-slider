@@ -1,4 +1,4 @@
-class CanvasSlider
+class CanvasViewport
   constructor: (@node, @images)->
     @context = @node.getContext '2d'
 
@@ -37,4 +37,4 @@ axisFitOnCanvas = (position, size, available)->
   [position, size, sourcePosition]
 
 
-module.exports = CanvasSlider
+module.exports = CanvasViewport
