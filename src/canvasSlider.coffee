@@ -7,12 +7,10 @@ module.exports = (node)->
 
   viewport = new CanvasViewport(node, images)
 
-  x = 0
-  viewport.render x
+  viewport.render 0
 
   dragHandler node, node.ownerDocument, (movement)->
-    x -= movement
-    viewport.render x
+    viewport.render viewport.position - movement
 
 getImages = (node)->
   Array.prototype.map.call node.children, (image, index)->
