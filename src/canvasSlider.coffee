@@ -11,7 +11,7 @@ module.exports = (node)->
   viewport.render x
 
   dragHandler node, node.ownerDocument, (movement)->
-    x += movement
+    x -= movement
     viewport.render x
 
 getImages = (node)->

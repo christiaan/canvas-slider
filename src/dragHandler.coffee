@@ -5,12 +5,12 @@ dragHandler = (node, parentNode, cb)->
       position = e.clientX
       return
 
-    parentNode.addEventListener 'mouseup', (e)->
+    parentNode.addEventListener 'mouseup', ->
       parentNode.removeEventListener 'mousemove', reportMovement
       return
 
     reportMovement = (e)->
-      movement = position - e.clientX
+      movement = e.clientX - position
       position = e.clientX
       cb movement
       return

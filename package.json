@@ -4,7 +4,9 @@
   "description": "browse trough images using a canvas tag",
   "scripts": {
     "build": "browserify src/index.coffee --extension=.coffee | uglifyjs -mc > dist/canvas-slider.js",
-    "watch": "watchify src/index.coffee --extension=.coffee -o dist/canvas-slider.js -dv & nws -p 3030",
+    "watch-js": "watchify src/index.coffee --extension=.coffee -o dist/canvas-slider.js -dv",
+    "watch-tests": "onchange 'dist/canvas-slider.js' 'src/**/*.test.coffee' -- npm test",
+    "serve": "nws -p 3030 & npm run watch-js & npm run watch-tests",
     "test": "mocha --compilers coffee:coffee-script/register src/**/*.test.coffee"
   },
   "repository": {
@@ -19,6 +21,7 @@
     "coffeeify": "^1.1.0",
     "mocha": "^2.2.4",
     "nws": "^0.6.1",
+    "onchange": "^1.1.0",
     "uglify-js": "^2.4.21",
     "watchify": "^3.2.1"
   },
