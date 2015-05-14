@@ -1,19 +1,20 @@
 CanvasViewport = require './CanvasViewport'
 Image = require './Image'
 
-canvasSlider = window.canvasSlider || {}
-
-canvasSlider.createFrom = (node) ->
-
+window.onload = ->
+  node = document.getElementById('slider')
   images = Array.prototype.map.call(node.children, (image, index)->
     x = (index * node.width) + centered(image.width, node.width)
     y = centered(image.height, node.height)
     new Image(image, x, y)
   )
 
-  return new CanvasViewport(node, images)
-
-window.canvasSlider = canvasSlider
+  viewport = new CanvasViewport(node, images)
+  x = 0
+  setInterval ->
+    viewport.render(x);
+    x += 1;
+  , 16
 
 centered = (size, available)->
   short = available - size
