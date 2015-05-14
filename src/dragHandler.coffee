@@ -1,20 +1,25 @@
-dragHandler = (node, parentNode, cb)->
-    position = 0
-    node.addEventListener 'mousedown', (e)->
-      parentNode.addEventListener 'mousemove', reportMovement
-      node.classList.add 'dragging'
-      position = e.clientX
-      return
+EventEmitter = require('events').EventEmitter
 
-    parentNode.addEventListener 'mouseup', ->
-      parentNode.removeEventListener 'mousemove', reportMovement
-      node.classList.remove 'dragging'
-      return
+dragHandler = (node, parentNode)->
+  events = new EventEmitter()
+  position = 0
+  node.addEventListener 'mousedown', (e)->
+    parentNode.addEventListener 'mousemove', reportMovement
+    position = e.clientX
+    events.emit 'dragStart'
+    return
 
-    reportMovement = (e)->
-      movement = e.clientX - position
-      position = e.clientX
-      cb movement
-      return
+  parentNode.addEventListener 'mouseup', ->
+    parentNode.removeEventListener 'mousemove', reportMovement
+    events.emit 'dragStop'
+    return
+
+  reportMovement = (e)->
+    movement = e.clientX - position
+    position = e.clientX
+    events.emit 'movement', movement
+    return
+
+  return events
 
 module.exports = dragHandler

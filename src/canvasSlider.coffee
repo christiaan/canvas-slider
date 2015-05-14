@@ -12,8 +12,10 @@ module.exports = (node)->
 
   viewport.render 0
 
-  dragHandler node, node.ownerDocument, (movement)->
-    viewport.render viewport.position - movement
+  dragHandler(node, node.ownerDocument)
+    .on('movement', (movement)-> viewport.render viewport.position - movement)
+    .on('dragStart', -> node.classList.add 'dragging')
+    .on('dragStop', -> node.classList.remove 'dragging')
 
 getImages = (node)->
   Array.prototype.map.call node.children, (image, index)->

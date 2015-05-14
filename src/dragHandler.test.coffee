@@ -20,7 +20,7 @@ node = {
 describe 'dragHandler', ->
   it 'should report movement on mousemove', ->
     movement = null
-    dragHandler node, node, (x)->
+    dragHandler(node, node).on 'movement', (x)->
       movement = x
 
     node.listeners.mousedown {clientX: 0}
@@ -34,9 +34,15 @@ describe 'dragHandler', ->
     assert.ok !node.listeners.mousemove
 
   it 'should indicate dragging by adding a class', ->
-    dragHandler node, node, (x)->
+    dragStart = false
+    dragStop = false
+    dragHandler(node, node)
+      .on('dragStart', -> dragStart = true)
+      .on('dragStop', -> dragStop = true)
+
     node.listeners.mousedown {clientX: 0}
-    assert.ok node.classList.list['dragging'], 'class dragging should be added'
+    assert.ok dragStart, 'dragStart should be emitted'
+    assert.ok !dragStop, 'dragStop should not be emitted'
 
     node.listeners.mouseup()
-    assert.ok !node.classList.list['dragging']
+    assert.ok dragStop, 'dragStop should be emitted'
